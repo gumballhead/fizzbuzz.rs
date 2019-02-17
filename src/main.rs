@@ -1,8 +1,14 @@
+use std::env::args;
+
 mod lib;
 use lib::fizzbuzz;
 
 fn main() {
-    for n in 1..=100 {
-        println!("{}", fizzbuzz(n))
+    let n: usize = args().nth(1)
+        .and_then(|n| n.parse().ok())
+        .unwrap_or(100);
+
+    for result in (1..).take(n).map(fizzbuzz) {
+        println!("{}", result);
     }
 }
