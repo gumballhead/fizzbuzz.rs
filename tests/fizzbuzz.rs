@@ -1,5 +1,7 @@
 extern crate fizzbuzz;
 
+use fizzbuzz::is_fizz;
+use fizzbuzz::is_buzz;
 use fizzbuzz::fizzbuzz;
 
 #[test]
@@ -30,7 +32,7 @@ fn test_fifteen_is_fizz_buzz() {
 #[test]
 fn test_fizzes() {
     let fizzes = (1..=100)
-        .filter(|&n| n % 3 == 0 && n % 5 != 0)
+        .filter(|&n| is_fizz(n) && !is_buzz(n))
         .map(fizzbuzz)
         .all(|it| it == "fizz");
 
@@ -40,7 +42,7 @@ fn test_fizzes() {
 #[test]
 fn test_buzzes() {
     let buzzes = (1..=100)
-        .filter(|&n| n % 5 == 0 && n % 3 != 0)
+        .filter(|&n| is_buzz(n) && !is_fizz(n))
         .map(fizzbuzz)
         .all(|it| it == "buzz");
 
@@ -50,7 +52,7 @@ fn test_buzzes() {
 #[test]
 fn test_fizzbuzzes() {
     let fizzbuzzes = (1..=100)
-        .filter(|&n| n % 3 == 0 && n % 5 == 0)
+        .filter(|&n| is_fizz(n) && is_buzz(n))
         .map(fizzbuzz)
         .all(|it| it == "fizzbuzz");
 
