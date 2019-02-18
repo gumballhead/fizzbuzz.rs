@@ -4,7 +4,7 @@ mod lib;
 use lib::fizzbuzz;
 
 fn main() {
-    let n: usize = args().nth(1)
+    let n = args().nth(1)
         .and_then(|n| n.parse().ok())
         .unwrap_or(100);
 
